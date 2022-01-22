@@ -57,10 +57,6 @@ const Welcome = () => {
               </div>
             </div>
           </div>
-          <div>
-            <p className="text-white">{address}</p>
-            <button onClick={() => setAddress("sdg")}>Press Me</button>
-          </div>
         </div>
       </div>
       <div className="p-5 mb-6 sm:w-96  flex flex-col  w-full h-full justify-center items-center blue-glassmorphism">

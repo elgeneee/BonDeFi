@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <div flex-initial justify-center items-center>
-          <h1 className="text-white text-3xl font-extrabold">BonDeFi</h1>
+          <h1 className="text-white text-3xl font-extrabold"><Link to="/">BonDeFi</Link></h1>
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-        <li className="mx-4 cursor-pointer">Market</li>
+        <li className="mx-4 cursor-pointer"><Link to="/tutorial">Market</Link></li>
         <li className="mx-4 cursor-pointer">Exchange</li>
         <li className="mx-4 cursor-pointer">Tutorials</li>
         <li className="mx-4 cursor-pointer">Wallets</li>
