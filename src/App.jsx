@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Welcome from "./components/Welcome";
-import Tutorial from "./components/Tutorial";
+import Swap from "./components/Swap";
 import { transactionContext } from "./components/transactionContext";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-[#0D182A]">
         <div className="bg-[#0D182A]">
           <Navbar />
           <Switch>
@@ -33,8 +33,8 @@ function App() {
                 <Welcome />
               </transactionContext.Provider>
             </Route>
-            <Route  path="/tutorial">
-              <Tutorial />
+            <Route  path="/swap">
+              <Swap />
             </Route>
           </Switch>
         </div>

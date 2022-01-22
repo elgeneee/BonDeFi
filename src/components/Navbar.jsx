@@ -7,11 +7,11 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
-      <div flex-initial justify-center items-center>
+      <div className="flex-initial justify-center items-center">
           <h1 className="text-white text-3xl font-extrabold"><Link to="/">BonDeFi</Link></h1>
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-        <li className="mx-4 cursor-pointer"><Link to="/tutorial">Market</Link></li>
+        <li className="mx-4 cursor-pointer"><Link to="/swap">Swap</Link></li>
         <li className="mx-4 cursor-pointer">Exchange</li>
         <li className="mx-4 cursor-pointer">Tutorials</li>
         <li className="mx-4 cursor-pointer">Wallets</li>
