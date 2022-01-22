@@ -12,9 +12,7 @@ const Navbar = () => {
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         <li className="mx-4 cursor-pointer"><Link to="/swap">Swap</Link></li>
-        <li className="mx-4 cursor-pointer">Exchange</li>
-        <li className="mx-4 cursor-pointer">Tutorials</li>
-        <li className="mx-4 cursor-pointer">Wallets</li>
+        <li className="mx-4 cursor-pointer"><Link to="/nftissuance">NFT Issuance</Link></li>
         <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
           Login
         </li>

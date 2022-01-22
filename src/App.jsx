@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Welcome from "./components/Welcome";
 import Swap from "./components/Swap";
+import NftIssuance from "./components/NftIssuance";
 import { transactionContext } from "./components/transactionContext";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route  path="/swap">
               <Swap />
+            </Route>
+            <Route  path="/nftissuance">
+              <NftIssuance />
             </Route>
           </Switch>
         </div>
