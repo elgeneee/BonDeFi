@@ -3,7 +3,7 @@ import React from "react";
 const Swap = () => {
   return (
     <div>
-      <h1 className="text-white text-2xl font-bold text-center">Swap</h1>
+      <h1 className="text-white text-2xl font-bold text-center my-6">Swap</h1>
       <div className="w-full flex md:justify-center  ">
         <div className="p-5 mb-6  flex flex-col w-8/12 h-full justify-center blue-glassmorphism">
           <div className="blue-glassmorphism2 flex flex-1 p-4 my-2">
