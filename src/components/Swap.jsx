@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ethers } from "ethers";
+import { contractABI, contractAddress } from "../utils/constants";
 
 const Swap = () => {
   const [value, updateValue] = useState(0);
@@ -48,6 +49,38 @@ const Swap = () => {
       }
     } catch (error) {
       alert(error);
+    }
+  };
+
+  const getEthereumContract = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, contractABI, signer);
+    console.log({ provider, signer, contract });
+  };
+
+  const contractFunction = async () => {
+    try {
+      if (!window.ethereum) {
+        return alert("No wallet found. Please  install metamask");
+      } else {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        const contractHash = await contract.create(
+          "0x11fc463E45994F23EbE5bb16E86b48C50ecb9231",
+          "https://hardhat.org/getting-started/"
+        );
+
+        alert(contractHash);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -124,7 +157,6 @@ const Swap = () => {
         {modal && (
           <div className="modal">
             <div
-              // onClick={toggleModal}
               className="overlay items-center justify-center flex"
             >
               <div className="relative  text-white bg-slate-700 rounded-xl  w-80 h-1/2 flex flex-col p-2">
@@ -156,7 +188,7 @@ const Swap = () => {
                 <div className=" absolute inset-x-0 bottom-0 ">
                   <button
                     type="button"
-                    onClick={signMessage}
+                    onClick={contractFunction}
                     className="text-white text-lg my-5 justify-center mx-auto flex shadow-lg shadow-blue-500/50  w-4/12 mt-2 p-2 bg-blue-500  hover:bg-blue-600 rounded-2xl cursor-pointer"
                   >
                     Confirm
