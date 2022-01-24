@@ -284,9 +284,7 @@ function PageThree({ formData, setFormData, props }) {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
   const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path}
-    </li>
+    <li key={file.path}>{file.path}</li>
   ));
 
   return (
@@ -320,7 +318,36 @@ function PageFour({ formData, setFormData }) {
         <Checkmark size="xxLarge" color="#4ade80" />
       </div>
 
-      <div>Information</div>
+      <div className="w-[40rem] mt-14 text-gray-300 h-20 px-4 py-3 border border-slate-300 rounded-md flex items-center justify-between overflow-hidden">
+        <div>
+          <p className="font-semibold flex flex-row">IPFS url: <p className="ml-2"> ipfs.com/ipfs/QmXoypizjW3W\</p></p>
+          <p className="font-semibold flex flew-row ">contract address: <p className="ml-2">0xf4d2888d29D722...F9164c092421E</p></p>
+          <p>liquidity contract:</p>
+        </div>
+        <div><button
+            type="button"
+            className="w-[4rem] my-5 justify-center flex shadow-lg shadow-blue-500/50 font-semibold text-sm mt-2 p-2 bg-cyan-500  hover:bg-cyan-600 rounded-2xl cursor-pointer"
+          >
+            Stake
+          </button></div>
+      </div>
+
+      {/* <div className="border-cyan-300 border rounded-xl w-80 h-96 my-6 text-white relative">
+        <h1>NFT</h1>
+        <div>
+          <p>IPFS URL: </p>
+          <p>Contract Address: </p>
+          <p>Liquidity Contract: </p>
+        </div>
+        <div className=" absolute inset-x-0 bottom-0 ">
+          <button
+            type="button"
+            className="text-white text-lg my-5 justify-center mx-auto flex shadow-lg shadow-blue-500/50  w-4/12 mt-2 p-2 bg-cyan-500  hover:bg-cyan-600 rounded-2xl cursor-pointer"
+          >
+            Stake
+          </button>
+        </div>
+      </div> */}
     </div>
   );
 }

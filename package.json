@@ -7,6 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.4.2",
     "ethers": "^5.5.3",
     "react": "^17.0.2",
     "react-checkmark": "^1.4.0",
