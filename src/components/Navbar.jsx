@@ -34,10 +34,8 @@ const Navbar = () => {
             <li className="text-xl w-full my-2">
               <AiOutlineClose onClick={() => setToggleMenu(false)} />
             </li>
-            <li className="mx-4 cursor-pointer">Market</li>
-            <li className="my-2 text-lg mx-4 cursor-pointer">Exchange</li>
-            <li className="my-2 text-lg mx-4 cursor-pointer">Tutorials</li>
-            <li className="my-2 text-lg mx-4 cursor-pointer">Wallets</li>
+            <li className="mx-4 cursor-pointer">Swap</li>
+            <li className="my-2 text-lg mx-4 cursor-pointer">NFT Issuance</li>
           </ul>
         )}
       </div>

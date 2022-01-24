@@ -127,7 +127,7 @@ function PageTwo({ formData, setFormData }) {
   };
 
   return (
-    <div>
+    <div className="page2">
       <form className="w-full max-w-lg">
         <div className="flex flex-nowrap">
           <div className="w-full md:w-1/2 mx-3">

@@ -145,3 +145,24 @@ code {
   border: 2px dashed #9b9b9b;
   border-radius: 10px;
 }
+
+.page2 {
+  width:600px;
+  height:400px;
+}
+
+.modal, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  backdrop-filter: blur(10px);
+  width: 100vw;
+  height: 100vh;
+}
