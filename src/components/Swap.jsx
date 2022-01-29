@@ -8,56 +8,13 @@ const Swap = () => {
 
   const [modal, setModal] = useState(false);
 
-  //ethers
-  const [defaultAccount, setDefaultAccount] = useState(null);
-  const [balance, setBalance] = useState(0);
+  // //ethers
+  // const [defaultAccount, setDefaultAccount] = useState(null);
+  // const [balance, setBalance] = useState(0);
 
-  const [provider, setProvider] = useState(null);
-  const [signer, setSigner] = useState(null);
-  const [contract, setContract] = useState(null);
-
-  const checkEthers = () => {
-    if (!window.ethereum) {
-      alert("No wallet found. Please make sure you install metamask");
-    } else {
-      //  window.ethereum.request({ method: 'eth_requestAccounts'})
-      //  .then(result => {
-      //  setDefaultAccount(result[0]);
-      //  alert(defaultAccount);
-      //  })
-      window.ethereum
-        .request({
-          method: "eth_getBalance",
-          params: ["0x11fc463e45994f23ebe5bb16e86b48c50ecb9231", "latest"],
-        })
-        .then((result) => {
-          alert(ethers.utils.formatEther(result));
-        });
-    }
-  };
-
-  const signMessage = async () => {
-    try {
-      if (!window.ethereum) {
-        alert("No wallet found. Please make sure you install metamask");
-      } else {
-        await window.ethereum.send("eth_requestAccounts");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const signature = await signer.signMessage("Hello World");
-        const address = await signer.getAddress();
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const getEthereumContract = () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, contractABI, signer);
-    console.log({ provider, signer, contract });
-  };
+  // const [provider, setProvider] = useState(null);
+  // const [signer, setSigner] = useState(null);
+  // const [contract, setContract] = useState(null);
 
   const contractFunction = async () => {
     try {
@@ -66,6 +23,7 @@ const Swap = () => {
       } else {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
+        const signerAddress = await signer.getAddress();
         const contract = new ethers.Contract(
           contractAddress,
           contractABI,
@@ -73,11 +31,10 @@ const Swap = () => {
         );
 
         const contractHash = await contract.create(
-          "0x11fc463E45994F23EbE5bb16E86b48C50ecb9231",
+          signerAddress,
           "https://hardhat.org/getting-started/"
         );
-
-        alert(contractHash);
+        console.log(contractHash);
       }
     } catch (error) {
       console.log(error);
@@ -107,9 +64,9 @@ const Swap = () => {
               <p className="text-gray-400">Swap from:</p>
               <p className="text-white">USDT</p>
             </div>
-            <div className="flex flex-auto items-center space-x-3 rounded bg-[#12243D] p-3 sm:w-3/5">
+            <div className="flex flex-auto items-center space-x-3 rounded bg-white p-3 sm:w-3/5">
               <input
-                className="text-white text-xl relative flex-auto overflow-hidden bg-transparent outline-0"
+                className="text-black text-xl relative flex-auto overflow-hidden bg-transparent outline-0"
                 placeholder="0.0"
                 value={value}
                 onChange={(e) => updateValue(e.target.value)}
@@ -133,9 +90,9 @@ const Swap = () => {
               <p className="text-gray-400">Swap To:</p>
               <p className="text-white">Bond Token</p>
             </div>
-            <div className="flex flex-auto items-center space-x-3 rounded bg-[#12243D] p-3 sm:w-3/5">
+            <div className="flex flex-auto items-center space-x-3 rounded bg-white p-3 sm:w-3/5">
               <input
-                className="text-white text-xl relative flex-auto overflow-hidden bg-transparent outline-0"
+                className="text-black text-xl relative flex-auto overflow-hidden bg-transparent outline-0"
                 value={value}
                 placeholder="0.0"
                 type="number"
@@ -156,9 +113,7 @@ const Swap = () => {
 
         {modal && (
           <div className="modal">
-            <div
-              className="overlay items-center justify-center flex"
-            >
+            <div className="overlay items-center justify-center flex">
               <div className="relative  text-white bg-slate-700 rounded-xl  w-80 h-1/2 flex flex-col p-2">
                 <div className="flex flex-row justify-between">
                   <div className="">

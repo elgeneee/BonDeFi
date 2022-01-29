@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,6 +7,9 @@ import { FaBuilding, FaMoneyBillAlt } from "react-icons/fa";
 import { MdEmail, MdLocationPin, MdBusinessCenter } from "react-icons/md";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { Checkmark } from "react-checkmark";
+import { ethers } from "ethers";
+import { contractABI, contractAddress } from "../utils/constants";
+import axios from "axios";
 
 const NftIssuance = () => {
   const [page, setPage] = useState(0);
@@ -120,10 +123,6 @@ function PageTwo({ formData, setFormData }) {
     var newDate = date.toLocaleString();
     setStartDate(date);
     setFormData({ ...formData, registeredDate: newDate });
-  };
-
-  const handleSelect = (date) => {
-    return date;
   };
 
   return (
@@ -271,9 +270,16 @@ function PageTwo({ formData, setFormData }) {
                 id="email-adress-icon"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-400 focus:border-cyan-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Georgetown, Penang"
+                onChange={(event) =>
+                  setFormData({
+                    ...formData,
+                    companyAddress: event.target.value,
+                  })
+                }
               ></input>
             </div>
           </div>
+          
         </div>
       </form>
     </div>
@@ -281,11 +287,33 @@ function PageTwo({ formData, setFormData }) {
 }
 
 function PageThree({ formData, setFormData, props }) {
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    accept: ".pdf",
+  });
 
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>{file.path}</li>
   ));
+
+  const test = () => {
+    console.log(acceptedFiles[0]);
+  };
+
+  const onFileUpload = () => {
+    const formData = new FormData();
+    formData.append("file", acceptedFiles[0]);
+
+    //call api
+    console.log(formData);
+    axios
+      .post(
+        "https://bsjvr7vsnk.execute-api.ap-southeast-1.amazonaws.com/prod/file-upload",
+        formData
+      )
+      .then(() => {
+        console.log("success");
+      });
+  };
 
   return (
     <div>
@@ -305,13 +333,46 @@ function PageThree({ formData, setFormData, props }) {
       </div>
       <aside className="text-white">
         <h4>Files</h4>
-        <ul>{files}</ul>
+        <ul>{typeof files}</ul>
       </aside>
     </div>
   );
 }
 
 function PageFour({ formData, setFormData }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [ipfsuri, setipfsuri] = useState("");
+  const [contractAddress2, setContractAddress2] = useState("");
+  const [tokenContract, setTokenContract] = useState("");
+  const contractFunction = async () => {
+    try {
+      if (!window.ethereum) {
+        return alert("No wallet found. Please  install metamask");
+      } else {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const signerAddress = await signer.getAddress();
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+        setipfsuri("ipfs.com/ipfs/QmXoypizjW3W");
+        setContractAddress2("0xf4d288...F9164c092421E");
+        setTokenContract("0xb67356...FH732B92337G");
+
+        const contractHash = await contract.create(
+          signerAddress,
+          "https://hardhat.org/getting-starte"
+        );
+
+        console.log(contractHash);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -320,34 +381,32 @@ function PageFour({ formData, setFormData }) {
 
       <div className="w-[40rem] mt-14 text-gray-300 h-20 px-4 py-3 border border-slate-300 rounded-md flex items-center justify-between overflow-hidden">
         <div>
-          <p className="font-semibold flex flex-row">IPFS url: <p className="ml-2"> ipfs.com/ipfs/QmXoypizjW3W\</p></p>
-          <p className="font-semibold flex flew-row ">contract address: <p className="ml-2">0xf4d2888d29D722...F9164c092421E</p></p>
-          <p>liquidity contract:</p>
+          <p className="font-semibold flex flex-row">
+            IPFS uri: <p className="ml-2">{ipfsuri}</p>
+          </p>
+          <p className="font-semibold flex flew-row ">
+            contract address: <p className="ml-2">{contractAddress2}</p>
+          </p>
+          <p className="font-semibold flex flew-row ">
+            token contract: <p className="ml-2">{tokenContract}</p>
+          </p>
         </div>
-        <div><button
-            type="button"
-            className="w-[4rem] my-5 justify-center flex shadow-lg shadow-blue-500/50 font-semibold text-sm mt-2 p-2 bg-cyan-500  hover:bg-cyan-600 rounded-2xl cursor-pointer"
-          >
-            Stake
-          </button></div>
-      </div>
-
-      {/* <div className="border-cyan-300 border rounded-xl w-80 h-96 my-6 text-white relative">
-        <h1>NFT</h1>
-        <div>
-          <p>IPFS URL: </p>
-          <p>Contract Address: </p>
-          <p>Liquidity Contract: </p>
-        </div>
-        <div className=" absolute inset-x-0 bottom-0 ">
+        <div className="flex flex-row">
           <button
             type="button"
-            className="text-white text-lg my-5 justify-center mx-auto flex shadow-lg shadow-blue-500/50  w-4/12 mt-2 p-2 bg-cyan-500  hover:bg-cyan-600 rounded-2xl cursor-pointer"
+            className="w-[4rem] my-5 justify-center flex shadow-lg shadow-blue-500/50 font-semibold text-sm mt-2 p-2 bg-cyan-500  hover:bg-cyan-600 rounded-lg cursor-pointer"
           >
             Stake
           </button>
+          <button
+            type="button"
+            onClick={contractFunction}
+            className="w-[4rem] ml-2 my-5 justify-center flex shadow-lg shadow-blue-500/50 font-semibold text-sm mt-2 p-2 bg-cyan-500  hover:bg-cyan-600 rounded-lg cursor-pointer"
+          >
+            Mint{" "}
+          </button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

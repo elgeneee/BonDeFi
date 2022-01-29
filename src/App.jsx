@@ -1,5 +1,4 @@
-import { useState } from "react";
-import logo from "./logo.svg";
+import React, { Component, useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Welcome from "./components/Welcome";

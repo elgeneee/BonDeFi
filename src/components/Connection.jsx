@@ -27,7 +27,7 @@ const Connection = () => {
         <AiFillPlayCircle className="text-white mr-2" />
         <p className="text-white text-base font-semibold">Connect Wallet</p>
       </button>
- </ConnectionContext.Provider>
+    </ConnectionContext.Provider>
   );
 };
 
@@ -38,8 +38,6 @@ export default () => (
       provided: { provider: window.cleanEthereum },
     }}
   >
-    <Connection  />
+    <Connection />
   </UseWalletProvider>
 );
-
-

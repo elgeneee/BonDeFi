@@ -1,10 +1,6 @@
-import React, { useState, useContext } from "react";
-import { HiMenuAlt4 } from "react-icons/hi";
-import { AiOutlineClose, AiFillPlayCircle } from "react-icons/ai";
+import React, { useContext } from "react";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
-import Loader from "./Loader";
-import { useWallet, UseWalletProvider } from "use-wallet";
 import Connection from "./Connection";
 import { ConnectionContext } from "./Connection";
 
@@ -17,6 +13,7 @@ const Welcome = () => {
 
   return (
     <div className="flex w-full flex-col justify-center items-center">
+
       <div className="flex items-start justify-between md:p-12 py-6 px-4">
         <div className="flex flex-1 justify-center flex-col">
           <h1 className="text-3xl sm:text-5xl text-center text-white text-gradient py-1">
