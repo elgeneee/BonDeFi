@@ -13,8 +13,8 @@
 ## Team
 No. | Team Member | Institution
 --- | --- | ---
-1 | XUE YAO | National University Singapore
-2 | ZHOU SHIKAI | National University Singapore
+1 | XUE YAO | National University of Singapore
+2 | ZHOU SHIKAI | National University of Singapore
 3 | ELGENE EE | University Malaya
 
 <!--PROBLEM STATEMENT-->
