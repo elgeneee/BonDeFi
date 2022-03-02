@@ -38,6 +38,7 @@ No. | Team Member | Institution
 - [ReactJS](https://reactjs.org)
 - [TailwindCSS](https://tailwindcss.com)
 - [Solidity](https://docs.soliditylang.org/en/v0.8.11/#)
+- [HardHat](https://hardhat.org)
 - [Web3](https://web3js.readthedocs.io/en/v1.7.0/)
 
 <!--OUTPUTS-->
